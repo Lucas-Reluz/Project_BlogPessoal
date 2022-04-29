@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace BlogPessoal.src.models
 {
+    #region Tabela de Usuarios
     [Table("tb_users")]
     public class UserModel
     {
@@ -27,3 +28,4 @@ namespace BlogPessoal.src.models
         public List<PostModel> MyPosts { get; set; }
     }
 }
+#endregion

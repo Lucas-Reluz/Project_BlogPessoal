@@ -4,8 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BlogPessoal.src.models;
 using System.Linq;
 
+#region Parte de Testes Usando InMemory
 namespace BlogPessoalTeste.Tests.data
 {
+    
     [TestClass]
     public class BlogPessoalContextTest
     {
@@ -38,3 +40,4 @@ namespace BlogPessoalTeste.Tests.data
         }
     }
 }
+#endregion

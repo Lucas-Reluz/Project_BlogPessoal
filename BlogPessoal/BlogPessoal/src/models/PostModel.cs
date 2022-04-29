@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BlogPessoal.src.models
 {
+    #region Tabela de Postagens
     [Table("tb_posts")]
     public class PostModel
     {
@@ -25,3 +26,4 @@ namespace BlogPessoal.src.models
         public ThemeModel SelectTheme { get; set; }
     }
 }
+#endregion

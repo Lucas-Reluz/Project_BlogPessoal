@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace BlogPessoal.src.models
 {
+    #region Tabela de Temas
     [Table("tb_themes")]
     public class ThemeModel
     {
@@ -19,3 +20,4 @@ namespace BlogPessoal.src.models
         public List<PostModel> RelatedPosts { get; set; }
     }
 }
+#endregion

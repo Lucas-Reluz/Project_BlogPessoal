@@ -41,12 +41,13 @@ namespace BlogPessoal
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BlogPessoalContext context)
         {
+            #region Cria um DB se não tiver um
             if (env.IsDevelopment())
             {
                 context.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
             }
-
+            #endregion
             app.UseRouting();
 
             app.UseAuthorization();
