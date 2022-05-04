@@ -40,6 +40,9 @@ namespace BlogPessoal.src.dtos
     /// </summary>
     public class UpdatePostDTO
     {
+        [Required]
+        public int Id { get; set; }
+        
         [Required, StringLength(30)]
         public string Title { get; set; }
 
