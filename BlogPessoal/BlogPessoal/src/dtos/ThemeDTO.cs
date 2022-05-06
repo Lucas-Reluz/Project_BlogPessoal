@@ -32,8 +32,9 @@ namespace BlogPessoal.src.dtos
         [Required, StringLength(20)]
         public string Description { get; set; }
 
-        public UpdateThemeDTO(string description)
+        public UpdateThemeDTO(int id, string description)
         {
+            Id = id;
             Description = description;
         }
     }

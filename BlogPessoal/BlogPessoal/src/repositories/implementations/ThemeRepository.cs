@@ -30,6 +30,11 @@ namespace BlogPessoal.src.repositories.implementations
             _context.SaveChanges();
         }
 
+        public List<ThemeModel> GetAllThemes()
+        {
+            return _context.Themes.ToList();
+        }
+
         public List<ThemeModel> GetThemeByDescription(string description)
         {
             return _context.Themes.Where(t => t.Description.Contains(description)).ToList();

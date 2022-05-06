@@ -17,5 +17,6 @@ namespace BlogPessoal.src.repositories
         void DeleteTheme(int id);
         ThemeModel GetThemeById(int id);
         List<ThemeModel> GetThemeByDescription(string description);
+        List<ThemeModel> GetAllThemes();
     }
 }

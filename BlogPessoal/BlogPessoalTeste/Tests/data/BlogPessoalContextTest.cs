@@ -8,7 +8,7 @@ using System.Linq;
 namespace BlogPessoalTeste.Tests.data
 {
     
-    [TestClass]
+    //[TestClass]
     public class BlogPessoalContextTest
     {
         private BlogPessoalContext _context;
@@ -16,11 +16,12 @@ namespace BlogPessoalTeste.Tests.data
         [TestInitialize]
         public void setup()
         {
-            var opt = new DbContextOptionsBuilder<BlogPessoalContext>().UseInMemoryDatabase(databaseName: "db_blogpessoal").Options;
+            var opt = new DbContextOptionsBuilder<BlogPessoalContext>().UseInMemoryDatabase(databaseName: "db_blogpessoal1").Options;
             _context = new BlogPessoalContext(opt);
         }
 
         [TestMethod]
+        [Ignore]
         public void InsertNewUserInDatabaseReturnUser()
         {
             UserModel user = new UserModel();

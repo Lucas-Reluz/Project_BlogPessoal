@@ -13,8 +13,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="src\repositories\implementations\" />
-  </ItemGroup>
-
 </Project>
