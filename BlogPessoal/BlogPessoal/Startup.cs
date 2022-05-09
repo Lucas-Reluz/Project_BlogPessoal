@@ -34,6 +34,7 @@ namespace BlogPessoal
 
             //Configuração Controlador
             services.AddControllers();
+            services.AddCors();
 
 
             // Contexto
@@ -44,7 +45,7 @@ namespace BlogPessoal
             services.AddDbContext<BlogPessoalContext>(
             opt => opt.
             UseSqlServer(config.GetConnectionString("DefaultConnection")));
-            
+
             // Repositorios
             services.AddScoped<IUser, UserRepository>();
             services.AddScoped<ITheme, ThemeRepository>();
@@ -63,8 +64,13 @@ namespace BlogPessoal
             #endregion
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseCors(c => c
+           .AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader());
 
+            app.UseAuthorization();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

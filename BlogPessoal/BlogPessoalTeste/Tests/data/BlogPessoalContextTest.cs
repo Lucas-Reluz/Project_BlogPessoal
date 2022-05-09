@@ -8,7 +8,7 @@ using System.Linq;
 namespace BlogPessoalTeste.Tests.data
 {
     
-    //[TestClass]
+    [TestClass]
     public class BlogPessoalContextTest
     {
         private BlogPessoalContext _context;
@@ -21,7 +21,6 @@ namespace BlogPessoalTeste.Tests.data
         }
 
         [TestMethod]
-        [Ignore]
         public void InsertNewUserInDatabaseReturnUser()
         {
             UserModel user = new UserModel();

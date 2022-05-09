@@ -1,4 +1,5 @@
-﻿using BlogPessoal.src.repositories;
+﻿using BlogPessoal.src.dtos;
+using BlogPessoal.src.repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogPessoal.src.controllers
@@ -53,6 +54,33 @@ namespace BlogPessoal.src.controllers
             if (user == null) return NotFound();
 
             return Ok(user);
+        }
+
+        [HttpPost]
+        public IActionResult NewUser([FromBody] NewUserDTO user)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            _repository.NewUser(user);
+            return Created($"api/Users/{user.Email}", user);
+
+        }
+
+        [HttpPut]
+        public IActionResult UpdateUser([FromBody] UpdateUserDTO user)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            _repository.UpdateUser(user);
+            return Ok();
+
+        }
+
+        [HttpDelete("delete/{idUser}")]
+        public IActionResult DeleteUser([FromRoute] int idUser)
+        {
+            _repository.DeleteUser(idUser);
+            return NoContent();
         }
     }
 }

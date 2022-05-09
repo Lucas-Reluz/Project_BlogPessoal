@@ -54,8 +54,9 @@ namespace BlogPessoal.src.dtos
         [Required]
         public string DescriptionTheme { get; set; }
 
-        public UpdatePostDTO(string title, string description, string photo, string descriptionTheme)
+        public UpdatePostDTO(int id,string title, string description, string photo, string descriptionTheme)
         {
+            Id = id;
             Title = title;
             Description = description;
             Photo = photo;
