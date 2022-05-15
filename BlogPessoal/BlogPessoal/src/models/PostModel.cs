@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BlogPessoal.src.models
 {
+    /// <summary>
+    /// <para>Resumo: Classe responsavel por representar tb_posts no banco.</para>
+    /// <para>Criado por: Lucas Reluz</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 12/05/2022 | 11:52</para>
+    /// </summary>
     #region Tabela de Postagens
     [Table("tb_posts")]
     public class PostModel

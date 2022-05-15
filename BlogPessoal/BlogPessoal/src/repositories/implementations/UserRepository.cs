@@ -1,11 +1,19 @@
 ﻿using BlogPessoal.src.data;
 using BlogPessoal.src.dtos;
 using BlogPessoal.src.models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlogPessoal.src.repositories.implementations
 {
+    /// <summary>
+    /// <para>Resumo: Classe responsavel por implementar IUser</para>
+    /// <para>Criado por: Lucas Reluz</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 12/05/2022 | 12:02</para>
+    /// </summary>
     public class UserRepository : IUser
     {
         #region Atributos
@@ -20,51 +28,90 @@ namespace BlogPessoal.src.repositories.implementations
         {
           _context = context;
         }
-        
+
         #endregion Construtores
 
         #region Metodos
-        public void DeleteUser(int id)
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por deletar o Usuario</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <param name="id">Id Usuario</param>
+        /// <para>Data: 12/05/2022 | 12:05</para>
+        /// </summary>
+        public async Task DeleteUserAsync(int id)
         {
-            _context.Users.Remove(GetUserById(id));
-            _context.SaveChanges();
+            _context.Users.Remove(await GetUserByIdAsync(id));
+            await _context.SaveChangesAsync();
             
         }
-
-        public UserModel GetUserByEmail(string email)
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por pegar usuario pelo email</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <param name="email">Email Usuario</param>
+        /// <para>Data: 12/05/2022 | 12:06</para>
+        /// </summary>
+        public async Task<UserModel> GetUserByEmailAsync(string email)
         {
-            return _context.Users.FirstOrDefault(u => u.Email == email);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
-
-        public UserModel GetUserById(int id)
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por pegar usuario pelo Id</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <param name="id">Id Usuario</param>
+        /// <para>Data: 12/05/2022 | 12:07</para>
+        /// </summary>
+        public async Task<UserModel> GetUserByIdAsync(int id)
         {
-            return _context.Users.FirstOrDefault(u => u.Id == id);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
-        public List<UserModel> GetUserByUsername(string name)
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por pegar usuario pelo nome</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <param name="name">Nome do Usuario</param>
+        /// <para>Data: 12/05/2022 | 12:07</para>
+        /// </summary>
+        public async Task<List<UserModel>> GetUserByUsernameAsync(string name)
         {
-            return _context.Users.Where(u => u.Name.Contains(name)).ToList();
+            return await _context.Users.Where(u => u.Name.Contains(name)).ToListAsync();
         }
-
-        public void NewUser(NewUserDTO user)
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por criar um novo usuario</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <param name="user">NewUserDTO</param>
+        /// <para>Data: 12/05/2022 | 12:09</para>
+        /// </summary>
+        public async Task NewUserAsync(NewUserDTO user)
         {
-            _context.Users.Add(new UserModel
+            await _context.Users.AddAsync(new UserModel
             {
+                Type = user.Type,
                 Name = user.Name,
                 Email = user.Email,
                 Password = user.Password,
                 Photo = user.Photo,                
             });
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-
-        public void UpdateUser(UpdateUserDTO user)
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por atualizar um usuario</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <param name="user">UpdateUserDTO</param>
+        /// <para>Data: 12/05/2022 | 12:09</para>
+        /// </summary>
+        public async Task UpdateUserAsync(UpdateUserDTO user)
         {
-            var _user = GetUserById(user.Id);
+            var _user = await GetUserByIdAsync(user.Id);
             _user.Name = user.Name;
             _user.Password = user.Password;
             _user.Photo = user.Photo;
             _context.Update(_user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

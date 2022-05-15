@@ -4,9 +4,16 @@ using BlogPessoal.src.models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlogPessoal.src.repositories.implementations
 {
+    /// <summary>
+    /// <para>Resumo: Classe responsavel por implementar IPost</para>
+    /// <para>Criado por: Lucas Reluz</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 12/05/2022 | 12:17</para>
+    /// </summary>
     public class PostRepository : IPost
     {
         #region Atributos
@@ -23,50 +30,76 @@ namespace BlogPessoal.src.repositories.implementations
         #endregion
 
         #region Metodos
-        public void DeletePost(int id)
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por deletar uma Postagem</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <param name="id">Id Postagem</param>
+        /// <para>Data: 12/05/2022 | 12:20</para>
+        /// </summary>
+        public async Task DeletePostAsync(int id)
         {
-            _context.Posts.Remove(GetPostById(id));
-            _context.SaveChanges();
+            _context.Posts.Remove(await GetPostByIdAsync(id));
+            await _context.SaveChangesAsync();
         }
-
-        public List<PostModel> GetAllPosts()
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por pegar todas as postagens</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <para>Data: 12/05/2022 | 12:21</para>
+        /// </summary>
+        public async Task<List<PostModel>> GetAllPostsAsync()
         {
-            return _context.Posts.ToList();
+            return await _context.Posts.ToListAsync();
         }
-
-        public PostModel GetPostById(int id)
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por pegar uma postagem pelo Id</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <param name="id">Id Postagem</param>
+        /// <para>Data: 12/05/2022 | 12:21</para>
+        /// </summary>
+        public async Task<PostModel> GetPostByIdAsync(int id)
         {
-            return _context.Posts.FirstOrDefault(p => p.Id == id);
+            return await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
         }
-
-        public List<PostModel> GetPostsbySearch(string title, string descriptionTheme, string creatorName)
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por deletar uma Postagem</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <param name="title">Titulo</param>
+        /// <param name="descriptionTheme">Descricao Tema</param>
+        /// <param name="creatorName">Nome do Criador</param>
+        /// <para>Data: 12/05/2022 | 12:23</para>
+        /// </summary>
+        public async Task<List<PostModel>> GetPostsbySearchAsync(string title, string descriptionTheme, string creatorName)
         {
             switch (title, descriptionTheme, creatorName)
             {
                 case (null, null, null):
-                    return GetAllPosts();
-                
+                    return await GetAllPostsAsync();
+
                 case (null, null, _):
                     return _context.Posts
                     .Include(p => p.SelectTheme)
                     .Include(p => p.Creator)
                     .Where(p => p.Creator.Name.Contains(creatorName))
                     .ToList();
-                
+
                 case (null, _, null):
                     return _context.Posts
                     .Include(p => p.SelectTheme)
                     .Include(p => p.Creator)
                     .Where(p => p.SelectTheme.Description.Contains(descriptionTheme))
                     .ToList();
-                
+
                 case (_, null, null):
                     return _context.Posts
                     .Include(p => p.SelectTheme)
                     .Include(p => p.Creator)
                     .Where(p => p.Title.Contains(title))
                     .ToList();
-                
+
                 case (_, _, null):
                     return _context.Posts
                     .Include(p => p.SelectTheme)
@@ -75,7 +108,7 @@ namespace BlogPessoal.src.repositories.implementations
                     p.Title.Contains(title) &
                     p.SelectTheme.Description.Contains(descriptionTheme))
                     .ToList();
-                
+
                 case (null, _, _):
                     return _context.Posts
                     .Include(p => p.SelectTheme)
@@ -84,7 +117,7 @@ namespace BlogPessoal.src.repositories.implementations
                     p.SelectTheme.Description.Contains(descriptionTheme) &
                     p.Creator.Name.Contains(creatorName))
                     .ToList();
-                
+
                 case (_, null, _):
                     return _context.Posts
                     .Include(p => p.SelectTheme)
@@ -93,7 +126,7 @@ namespace BlogPessoal.src.repositories.implementations
                     p.Title.Contains(title) &
                     p.Creator.Name.Contains(creatorName))
                     .ToList();
-                
+
                 case (_, _, _):
                     return _context.Posts
                     .Include(p => p.SelectTheme)
@@ -106,10 +139,16 @@ namespace BlogPessoal.src.repositories.implementations
 
             }
         }
-
-            public void NewPost(NewPostDTO post)
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por criar nova postagem</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <param name="post">NewPostDTO</param>
+        /// <para>Data: 12/05/2022 | 12:24</para>
+        /// </summary>
+        public async Task NewPostAsync(NewPostDTO post)
         {
-            _context.Posts.Add(new PostModel
+            await _context.Posts.AddAsync(new PostModel
             {
                 Title = post.Title,
                 Description = post.Description,
@@ -117,19 +156,25 @@ namespace BlogPessoal.src.repositories.implementations
                 Creator = _context.Users.FirstOrDefault(u => u.Email == post.CreatorEmail),
                 SelectTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescriptionTheme)
             });
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
         }
-
-        public void UpdatePost(UpdatePostDTO post)
+        /// <summary>
+        /// <para>Resumo: Metodo assincrono responsavel por atualizar uma postagem</para>
+        /// <para>Criado por: Lucas Reluz</para>
+        /// <para>Versão: 1.0</para>
+        /// <param name="post">UpdatePostDTO</param>
+        /// <para>Data: 12/05/2022 | 12:24</para>
+        /// </summary>
+        public async Task UpdatePostAsync(UpdatePostDTO post)
         {
-            var _post = GetPostById(post.Id);
+            var _post = await GetPostByIdAsync(post.Id);
             _post.Title = post.Title;
             _post.Description = post.Description;
             _post.Photo = post.Photo;
             _post.SelectTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescriptionTheme);
             _context.Update(_post);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

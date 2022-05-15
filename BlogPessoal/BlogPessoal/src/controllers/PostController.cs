@@ -1,6 +1,10 @@
 ﻿using BlogPessoal.src.dtos;
+using BlogPessoal.src.models;
 using BlogPessoal.src.repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace BlogPessoal.src.controllers
 {
@@ -23,60 +27,142 @@ namespace BlogPessoal.src.controllers
         }
 
         #endregion
-        
+
         #region Metodos
+
+        /// <summary>
+        /// Pegar postagem pelo Id
+        /// </summary>
+        /// <param name="postId">int</param>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Retorna a postagem</response>
+        /// <response code="404">Postagem não existente</response>
         [HttpGet("id/{idPost}")]
-        public IActionResult GetPostsById([FromRoute] int postId)
+        [Authorize]
+        public async Task<ActionResult> GetPostsByIdAsync([FromRoute] int postId)
         {
-            var post = _repository.GetPostById(postId);
+            var post = await _repository.GetPostByIdAsync(postId);
 
             if (post == null) return NotFound();
 
             return Ok(post);
         }
 
+        /// <summary>
+        /// Pegar todas postagens
+        /// </summary>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Lista de postagens</response>
+        /// <response code="204">Lista vasia</response>
         [HttpGet]
-        public IActionResult GetAllPosts()
+        [Authorize]
+        public async Task<ActionResult> GetAllPostsAsync()
         {
-            var list = _repository.GetAllPosts();
+            var list = await _repository.GetAllPostsAsync();
 
             if (list.Count < 1) return NoContent();
 
             return Ok(list);
         }
 
+        /// <summary>
+        /// Pegar postagens por Pesquisa
+        /// </summary>
+        /// <param name="title">string</param>
+        /// <param name="descriptionTheme">string</param>
+        /// <param name="creatorName">string</param>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Retorna postagens</response>
+        /// <response code="204">Postagns não existe pra essa pesquisa</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostModel))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet("search")]
-        public IActionResult GetPostsBySearch([FromQuery] string title, [FromQuery] string descriptionTheme, [FromQuery] string creatorName)
+        [Authorize]
+        public async Task<ActionResult> GetPostsBySearchAsync([FromQuery] string title, [FromQuery] string descriptionTheme, [FromQuery] string creatorName)
         {
-            var posts = _repository.GetPostsbySearch(title, descriptionTheme, creatorName);
+            var posts = await _repository.GetPostsbySearchAsync(title, descriptionTheme, creatorName);
             
             if(posts.Count < 1) return NoContent();
 
             return Ok(posts);
         }
 
+        /// <summary>
+        /// Criar nova Postagem
+        /// </summary>
+        /// <param name="post">NovaPostagemDTO</param>
+        /// <returns>ActionResult</returns>
+        /// <remarks>
+        /// Exemplo de requisição:
+        ///
+        ///     POST /api/Posts
+        ///     {  
+        ///        "titulo": "Vendo Fiat Uno", 
+        ///        "descricao": "Aceito 7k na mão ou 8k Parcelando,
+        ///        "foto": "URLFOTODOFIATUNO",
+        ///        "emailCriador": "cleiton@email.com",
+        ///        "descricaoTema": "CARROS"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="201">Retorna postagem criada</response>
+        /// <response code="400">Erro na requisição</response>
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(PostModel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
-        public IActionResult NewPost([FromBody] NewPostDTO post)
+        [Authorize]
+        public async Task <ActionResult> NewPostAsync([FromBody] NewPostDTO post)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            _repository.NewPost(post);
+            await _repository.NewPostAsync(post);
             return Created($"api/Posts", post);
         }
 
+        /// <summary>
+        /// Atualizar Post
+        /// </summary>
+        /// <param name="upPost">AtualizarPostagemDTO</param>
+        /// <returns>ActionResult</returns>
+        /// <remarks>
+        /// Exemplo de requisição:
+        ///
+        ///     PUT /api/Posts
+        ///     {
+        ///        "id": 1,   
+        ///        "titulo": "Já vendi o Fiat Uno", 
+        ///        "descricao": "Mas ainda tenho outras coisas pra vender, quem quiser DM",
+        ///        "foto": "URLDAIMAGEMDASCOISAS",
+        ///        "descricaoTema": "ELETRONICOS"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Retorna postagem atualizada</response>
+        /// <response code="400">Erro na requisição</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostModel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
-        public IActionResult UpdatePost([FromBody] UpdatePostDTO upPost)
+        [Authorize]
+        public async Task<ActionResult> UpdatePostAsync([FromBody] UpdatePostDTO upPost)
         {
             if (!ModelState.IsValid) return BadRequest();
             
-            _repository.UpdatePost(upPost);
+            await _repository.UpdatePostAsync(upPost);
             return Ok(upPost);
         }
 
+        /// <summary>
+        /// Deletar postagem pelo Id
+        /// </summary>
+        /// <param name="idPost">int</param>
+        /// <returns>ActionResult</returns>
+        /// <response code="204">Postagem deletada</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpDelete("delete/{idPost}")]
-        public IActionResult DeletePost([FromRoute] int idPost)
+        [Authorize]
+        public async Task<ActionResult> DeletePostAsync([FromRoute] int idPost)
         {
-            _repository.DeletePost(idPost);
+            await _repository.DeletePostAsync(idPost);
             return NoContent();        
         }
     }
