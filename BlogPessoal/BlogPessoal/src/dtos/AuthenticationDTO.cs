@@ -2,13 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace BlogPessoal.src.dtos
-{ 
-  /// <summary>
-  /// <para>Resumo: Classe espelho para criar uma nova Autenticacao</para>
-  /// <para>Criado por: Lucas Reluz</para>
-  /// <para>Versão: 1.0</para>
-  /// <para>Data: 13/05/2022 | Horario 11:55</para>
-  /// </summary>
+{
+    /// <summary>
+    /// <para>Abstract: Mirror class to create a new Authentication</para>
+    /// <para>Created by: Lucas Reluz</para>
+    /// <para>Version: 1.0</para>
+    /// <para>Data: 13/05/2022 | Horario 11:55</para>
+    /// </summary>
     public class AuthenticationDTO
     {
         [Required]
@@ -22,8 +22,8 @@ namespace BlogPessoal.src.dtos
         }
     }
     /// <summary>
-    /// <para>Resumo: Classe espelho para criar uma nova Autorizacao</para>
-    /// <para>Criado por: Lucas Reluz</para>
+    /// <para>Abstract: Mirror class to update a Authentication</para>
+    /// <para>Created by: Lucas Reluz</para>
     /// <para>Versão: 1.0</para>
     /// <para>Data: 13/05/2022 | Horario 11:55</para>
     /// </summary>

@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 namespace BlogPessoal.src.services.implementations
 {
     /// <summary>
-    /// <para>Resumo: Classe responsavel por implementar IAutenticacao</para>
-    /// <para>Criado por: Lucas Reluz</para>
+    /// <para>Abstract: Class responsible for implementing IAuthentication</para>
+    /// <para>Created by: Lucas Reluz</para>
     /// <para>Versão: 1.0</para>
     /// <para>Data: 15/05/2022 | 15:46 </para>
     /// </summary>

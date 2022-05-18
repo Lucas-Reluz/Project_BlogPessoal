@@ -3,9 +3,9 @@
 namespace BlogPessoal.src.dtos
 {
     /// <summary>
-    /// <para>Resumo: Classe espelho para criar uma nova postagem</para>
-    /// <para>Criado por: Lucas Reluz</para>
-    /// <para>Versão: 1.0</para>
+    /// <para>Abstract: Mirror class to create a new post</para>
+    /// <para>Created by: Lucas Reluz</para>
+    /// <para>Version: 1.0</para>
     /// <para>Data: 29/04/2022 / Horario 12:00</para>
     /// </summary>
     public class NewPostDTO
@@ -33,9 +33,9 @@ namespace BlogPessoal.src.dtos
         }
     }
     /// <summary>
-    /// <para>Resumo: Classe espelho para atualizar uma nova postagem</para>
-    /// <para>Criado por: Lucas Reluz</para>
-    /// <para>Versão: 1.0</para>
+    /// <para>Abstract Mirror class to update a post</para>
+    /// <para>Created by: Lucas Reluz</para>
+    /// <para>Version: 1.0</para>
     /// <para>Data: 29/04/2022 / Horario 12:29</para>
     /// </summary>
     public class UpdatePostDTO

@@ -35,12 +35,12 @@ namespace BlogPessoal.src.controllers
         #region Metodos
         
         /// <summary>
-        /// Pegar usuario pelo Id
+        /// Get user by id
         /// </summary>
         /// <param name="idUser">int</param>
         /// <returns>ActionResult</returns>
-        /// <response code="200">Retorna o usuario</response>
-        /// <response code="404">Usuario não existente</response>
+        /// <response code="200">Return User</response>
+        /// <response code="404">User does not exist</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("id/{idUser}")]
@@ -55,7 +55,7 @@ namespace BlogPessoal.src.controllers
         }
         
         /// <summary>
-        /// Pegar usuario pelo nome
+        /// Get user by name
         /// </summary>
         /// <param name="userName">int</param>
         /// <returns>ActionResult</returns>
@@ -75,12 +75,12 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Pegar usuario pelo nome
+        /// Get user by email
         /// </summary>
         /// <param name="emailUser">int</param>
         /// <returns>ActionResult</returns>
-        /// <response code="200">Retorna o usuario</response>
-        /// <response code="204">Nome não existe</response>
+        /// <response code="200">Return the user</response>
+        /// <response code="204">Email does not exist</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet("email/{emailUser}")]
@@ -96,12 +96,12 @@ namespace BlogPessoal.src.controllers
 
 
         /// <summary>
-        /// Criar novo Usuario
+        /// Create New User
         /// </summary>
         /// <param name="user">NewUserDTO</param>
         /// <returns>ActionResult</returns>
         /// <remarks>
-        /// Exemplo de requisição:
+        /// Requisition example:
         ///
         ///     POST /api/Users
         ///     {
@@ -113,9 +113,9 @@ namespace BlogPessoal.src.controllers
         ///     }
         ///
         /// </remarks>
-        /// <response code="201">Retorna usuario criado</response>
-        /// <response code="400">Erro na requisição</response>
-        /// <response code="401">E-mail ja cadastrado</response>
+        /// <response code="201"> Return created user</response>
+        /// <response code="400"> request error </response>
+        /// <response code="401">E-mail already registered</response>
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UserModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -136,12 +136,12 @@ namespace BlogPessoal.src.controllers
             }
         }
         /// <summary>
-        /// Atualizar Usuario
+        /// Update user
         /// </summary>
         /// <param name="user">UpdateUserDTO</param>
         /// <returns>ActionResult</returns>
         /// <remarks>
-        /// Exemplo de requisição:
+        /// Requisition example:
         ///
         ///     PUT /api/Users
         ///     {
@@ -152,8 +152,8 @@ namespace BlogPessoal.src.controllers
         ///     }
         ///
         /// </remarks>
-        /// <response code="200">Retorna usuario atualizado</response>
-        /// <response code="400">Erro na requisição</response>
+        /// <response code="200">Return updated user</response>
+        /// <response code="400">Request error</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
@@ -170,11 +170,11 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Deletar usuario pelo Id
+        /// Delete user by id
         /// </summary>
         /// <param name="idUser">int</param>
         /// <returns>ActionResult</returns>
-        /// <response code="204">Usuario deletado</response>
+        /// <response code="204">User deleted</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpDelete("delete/{idUser}")]
         [Authorize(Roles = "ADMIN")]

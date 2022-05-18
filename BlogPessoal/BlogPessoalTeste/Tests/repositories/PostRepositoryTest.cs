@@ -2,6 +2,7 @@
 using BlogPessoal.src.dtos;
 using BlogPessoal.src.repositories;
 using BlogPessoal.src.repositories.implementations;
+using BlogPessoal.src.utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -22,7 +23,7 @@ namespace BlogPessoalTeste.Tests.repositories
         private IPost _repositoryP;
 
         [TestMethod]
-        public void CreateThreePostsInSystemReturnThree()
+        public async Task CreateThreePostsInSystemReturnThree()
         {
             // Definindo o contexto
             var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
@@ -35,22 +36,22 @@ namespace BlogPessoalTeste.Tests.repositories
             _repositoryP = new PostRepository(_context);
 
             // GIVEN - Dado que registro 2 usuarios
-            _repositoryU.NewUser(
+            await _repositoryU.NewUserAsync(
                 new NewUserDTO
-                ("Gustavo Boaz", "gustavo@email.com", "134652", "URLDAFOTO")
+                (TypeUser.USER, "Gustavo Boaz", "gustavo@email.com", "134652", "URLDAFOTO")
             );
 
-            _repositoryU.NewUser(
+            await _repositoryU.NewUserAsync(
                 new NewUserDTO
-                ("Catarina Boaz", "catarina@email.com", "134652", "URLDAFOTO")
+                (TypeUser.USER, "Catarina Boaz", "catarina@email.com", "134652", "URLDAFOTO")
             );
 
             // AND - E que registro 2 temas
-            _repositoryT.NewTheme(new NewThemeDTO("C#"));
-            _repositoryT.NewTheme(new NewThemeDTO("Java"));
+            await _repositoryT.NewThemeAsync(new NewThemeDTO("C#"));
+            await _repositoryT.NewThemeAsync(new NewThemeDTO("Java"));
 
             // WHEN - Quando registro 3 postagens
-            _repositoryP.NewPost(
+            await _repositoryP.NewPostAsync(
                 new NewPostDTO(
                     "C# é muito massa",
                     "É uma linguagem muito utilizada no mundo",
@@ -59,7 +60,7 @@ namespace BlogPessoalTeste.Tests.repositories
                     "C#"
                 )
             );
-            _repositoryP.NewPost(
+            await _repositoryP.NewPostAsync(
                 new NewPostDTO(
                     "C# pode ser usado com Testes",
                     "O teste unitário é importante para o desenvolvimento",
@@ -68,7 +69,7 @@ namespace BlogPessoalTeste.Tests.repositories
                     "C#"
                 )
             );
-            _repositoryP.NewPost(
+            await _repositoryP.NewPostAsync(
                 new NewPostDTO(
                     "Java é muito massa",
                     "Java também é muito utilizada no mundo",
@@ -78,13 +79,14 @@ namespace BlogPessoalTeste.Tests.repositories
                 )
             );
 
+            var posts = await _repositoryP.GetAllPostsAsync();
             // WHEN - Quando eu busco todas as postagens
             // THEN - Eu tenho 3 postagens
-            Assert.AreEqual(3, _repositoryP.GetAllPosts().Count());
+            Assert.AreEqual(3, posts.Count());
         }
 
         [TestMethod]
-        public void UpdatePostReturnPostActualized()
+        public async Task UpdatePostReturnPostActualized()
         {
             // Definindo o contexto
             var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
@@ -97,17 +99,17 @@ namespace BlogPessoalTeste.Tests.repositories
             _repositoryP = new PostRepository(_context);
 
             // GIVEN - Dado que registro 1 usuarios
-            _repositoryU.NewUser(
+            await _repositoryU.NewUserAsync(
                 new NewUserDTO
-                ("Gustavo Boaz", "gustavo@email.com", "134652", "URLDAFOTO")
+                (TypeUser.USER, "Gustavo Boaz", "gustavo@email.com", "134652", "URLDAFOTO")
             );
 
             // AND - E que registro 1 tema
-            _repositoryT.NewTheme(new NewThemeDTO("COBOL"));
-            _repositoryT.NewTheme(new NewThemeDTO("C#"));
+            await _repositoryT.NewThemeAsync(new NewThemeDTO("COBOL"));
+            await _repositoryT.NewThemeAsync(new NewThemeDTO("C#"));
 
             // AND - E que registro 1 postagem
-            _repositoryP.NewPost(
+            await _repositoryP.NewPostAsync(
                 new NewPostDTO(
                     "COBOL é muito massa",
                     "É uma linguagem muito utilizada no mundo",
@@ -118,7 +120,7 @@ namespace BlogPessoalTeste.Tests.repositories
             );
 
             // WHEN - Quando atualizo postagem de id 1
-            _repositoryP.UpdatePost(
+            await _repositoryP.UpdatePostAsync(
                 new UpdatePostDTO(
                     1,
                     "C# é muito massa",
@@ -128,27 +130,28 @@ namespace BlogPessoalTeste.Tests.repositories
                 )
             );
 
+            var posts = await _repositoryP.GetPostByIdAsync(1);
             // THEN - Eu tenho a postagem atualizada
             Assert.AreEqual(
                 "C# é muito massa",
-                _repositoryP.GetPostById(1).Title
+               posts.Title
             );
             Assert.AreEqual(
                 "C# é muito utilizada no mundo",
-                _repositoryP.GetPostById(1).Description
+                posts.Description
             );
             Assert.AreEqual(
                 "URLDAFOTOATUALIZADA",
-                _repositoryP.GetPostById(1).Photo
+                posts.Photo
             );
             Assert.AreEqual(
                 "C#",
-                _repositoryP.GetPostById(1).SelectTheme.Description
+                posts.SelectTheme.Description
             );
         }
 
         [TestMethod]
-        public void GetPostBySearchReturnCustom()
+        public async Task GetPostBySearchReturnCustom()
         {
             // Definindo o contexto
             var opt = new DbContextOptionsBuilder<BlogPessoalContext>()
@@ -161,22 +164,22 @@ namespace BlogPessoalTeste.Tests.repositories
             _repositoryP = new PostRepository(_context);
 
             // GIVEN - Dado que registro 2 usuarios
-            _repositoryU.NewUser(
+            await _repositoryU.NewUserAsync(
                 new NewUserDTO
-                ("Gustavo Boaz", "gustavo@email.com", "134652", "URLDAFOTO")
+                (TypeUser.USER, "Gustavo Boaz", "gustavo@email.com", "134652", "URLDAFOTO")
             );
 
-            _repositoryU.NewUser(
+            await _repositoryU.NewUserAsync(
                 new NewUserDTO
-                ("Catarina Boaz", "catarina@email.com", "134652", "URLDAFOTO")
-            );
+                (TypeUser.USER, "Catarina Boaz", "catarina@email.com", "134652", "URLDAFOTO")
+            ); ;
 
             // AND - E que registro 2 temas
-            _repositoryT.NewTheme(new NewThemeDTO("C#"));
-            _repositoryT.NewTheme(new NewThemeDTO("Java"));
+            await _repositoryT.NewThemeAsync(new NewThemeDTO("C#"));
+            await _repositoryT.NewThemeAsync(new NewThemeDTO("Java"));
 
             // WHEN - Quando registro 3 postagens
-            _repositoryP.NewPost(
+            await _repositoryP.NewPostAsync(
                 new NewPostDTO(
                     "C# é muito massa",
                     "É uma linguagem muito utilizada no mundo",
@@ -185,7 +188,7 @@ namespace BlogPessoalTeste.Tests.repositories
                     "C#"
                 )
             );
-            _repositoryP.NewPost(
+            await _repositoryP.NewPostAsync(
                 new NewPostDTO(
                     "C# pode ser usado com Testes",
                     "O teste unitário é importante para o desenvolvimento",
@@ -194,7 +197,7 @@ namespace BlogPessoalTeste.Tests.repositories
                     "C#"
                 )
             );
-            _repositoryP.NewPost(
+            await _repositoryP.NewPostAsync(
                 new NewPostDTO(
                     "Java é muito massa",
                     "Java também é muito utilizada no mundo",
@@ -204,19 +207,22 @@ namespace BlogPessoalTeste.Tests.repositories
                 )
             );
 
+            var posts1 = await _repositoryP.GetPostsbySearchAsync("massa", null, null);
+            var posts2 = await _repositoryP.GetPostsbySearchAsync(null, "C#", null);
+            var posts3 = await _repositoryP.GetPostsbySearchAsync(null, null, "Gu");
             // WHEN - Quando eu busco as postagen
             // THEN - Eu tenho as postagens que correspondem aos criterios
             Assert.AreEqual(
                 2,
-                _repositoryP.GetPostsbySearch("massa", null, null).Count
+                 posts1.Count
             );
             Assert.AreEqual(
                 2,
-                _repositoryP.GetPostsbySearch(null, "C#", null).Count
+                 posts2.Count
             );
             Assert.AreEqual(
                 2,
-                _repositoryP.GetPostsbySearch(null, null, "Gu").Count
+                 posts3.Count
             );
         }
 

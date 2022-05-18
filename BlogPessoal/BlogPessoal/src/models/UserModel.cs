@@ -7,9 +7,9 @@ using System.Text.Json.Serialization;
 namespace BlogPessoal.src.models
 {
     /// <summary>
-    /// <para>Resumo: Classe responsavel por representar tb_users no banco.</para>
-    /// <para>Criado por: Lucas Reluz</para>
-    /// <para>Versão: 1.0</para>
+    /// <para>Abstract: Class responsible for representing tb_users in the database</para>
+    /// <para>Created by: Lucas Reluz</para>
+    /// <para>Version: 1.0</para>
     /// <para>Data: 12/05/2022 | 11:52</para>
     /// </summary>
     #region Tabela de Usuarios

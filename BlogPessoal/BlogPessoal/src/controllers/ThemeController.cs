@@ -33,11 +33,11 @@ namespace BlogPessoal.src.controllers
         #region Metodos
 
         /// <summary>
-        /// Pegar todos temas
+        /// Get all themes
         /// </summary>
         /// <returns>ActionResult</returns>
-        /// <response code="200">Lista de temas</response>
-        /// <response code="204">Lista vasia</response>
+        /// <response code="200">list of themes</response>
+        /// <response code="204">empty list</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet]
@@ -52,12 +52,12 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Pegar tema pelo Id
+        /// Get theme by id
         /// </summary>
         /// <param name="idTheme">int</param>
         /// <returns>ActionResult</returns>
-        /// <response code="200">Retorna o tema</response>
-        /// <response code="404">Tema não existente</response>
+        /// <response code="200">Return theme</response>
+        /// <response code="404">Theme does not exist</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ThemeModel))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("id/{idTheme}")]
@@ -72,12 +72,12 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Pegar tema pela Descrição
+        /// Get theme by description
         /// </summary>
         /// <param name="descriptiontheme">string</param>
         /// <returns>ActionResult</returns>
-        /// <response code="200">Retorna temas</response>
-        /// <response code="204">Descrição não existe</response>
+        /// <response code="200">Return themes</response>
+        /// <response code="204">Description does not exist</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ThemeModel))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet("search")]
@@ -93,12 +93,12 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Criar novo Tema
+        /// Create new theme
         /// </summary>
         /// <param name="theme">NewThemeDTO</param>
         /// <returns>ActionResult</returns>
         /// <remarks>
-        /// Exemplo de requisição:
+        /// Requisition example:
         ///
         ///     POST /api/Themes
         ///     {
@@ -106,8 +106,8 @@ namespace BlogPessoal.src.controllers
         ///     }
         ///
         /// </remarks>
-        /// <response code="201">Retorna tema criado</response>
-        /// <response code="400">Erro na requisição</response>
+        /// <response code="201">Return created theme</response>
+        /// <response code="400">requisition error</response>
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ThemeModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
@@ -123,12 +123,12 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Atualizar Tema
+        /// Update theme
         /// </summary>
         /// <param name="uptheme">NewThemeDTO</param>
         /// <returns>ActionResult</returns>
         /// <remarks>
-        /// Exemplo de requisição:
+        /// Requisition example:
         ///
         ///     POST /api/Themes
         ///     {
@@ -136,8 +136,8 @@ namespace BlogPessoal.src.controllers
         ///     }
         ///
         /// </remarks>
-        /// <response code="201">Retorna tema atualizado</response>
-        /// <response code="400">Erro na requisição</response>
+        /// <response code="201">Return updated theme</response>
+        /// <response code="400">requisition error</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ThemeModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
@@ -152,11 +152,11 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Deletar tema pelo Id
+        /// Delete theme by id
         /// </summary>
         /// <param name="delTheme">int</param>
         /// <returns>ActionResult</returns>
-        /// <response code="204">Tema deletado</response>
+        /// <response code="204">Deleted theme</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpDelete("delete/{idTheme}")]
         [Authorize(Roles = "ADMIN")]

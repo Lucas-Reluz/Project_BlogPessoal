@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 namespace BlogPessoal.src.services
 {
     /// <summary>
-    /// <para>Resumo: Responsavel por representar ações de CRUD de Autenticacao</para>
-    /// <para>Criado por: Lucas Reluz</para>
-    /// <para>Versão: 1.0</para>
+    /// <para>Abstract: Responsible for representing Authentication CRUD actions</para>
+    /// <para>Created by: Lucas Reluz</para>
+    /// <para>Version: 1.0</para>
     /// <para>Data: 15/05/2022 Horario 15:43 </para>
     /// </summary>
     public interface IAuthentication

@@ -31,12 +31,12 @@ namespace BlogPessoal.src.controllers
         #region Metodos
 
         /// <summary>
-        /// Pegar postagem pelo Id
+        /// Get post by Id
         /// </summary>
         /// <param name="postId">int</param>
         /// <returns>ActionResult</returns>
-        /// <response code="200">Retorna a postagem</response>
-        /// <response code="404">Postagem não existente</response>
+        /// <response code="200">Return post</response>
+        /// <response code="404">Post does not exist</response>
         [HttpGet("id/{idPost}")]
         [Authorize]
         public async Task<ActionResult> GetPostsByIdAsync([FromRoute] int postId)
@@ -49,11 +49,11 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Pegar todas postagens
+        /// Get all posts
         /// </summary>
         /// <returns>ActionResult</returns>
-        /// <response code="200">Lista de postagens</response>
-        /// <response code="204">Lista vasia</response>
+        /// <response code="200">Post list</response>
+        /// <response code="204">Empty list</response>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> GetAllPostsAsync()
@@ -66,14 +66,14 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Pegar postagens por Pesquisa
+        /// Get posts by search
         /// </summary>
         /// <param name="title">string</param>
         /// <param name="descriptionTheme">string</param>
         /// <param name="creatorName">string</param>
         /// <returns>ActionResult</returns>
-        /// <response code="200">Retorna postagens</response>
-        /// <response code="204">Postagns não existe pra essa pesquisa</response>
+        /// <response code="200">Return posts</response>
+        /// <response code="204">Posts do not exist for this search</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostModel))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet("search")]
@@ -88,7 +88,7 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Criar nova Postagem
+        /// Create new post
         /// </summary>
         /// <param name="post">NovaPostagemDTO</param>
         /// <returns>ActionResult</returns>
@@ -105,8 +105,8 @@ namespace BlogPessoal.src.controllers
         ///     }
         ///
         /// </remarks>
-        /// <response code="201">Retorna postagem criada</response>
-        /// <response code="400">Erro na requisição</response>
+        /// <response code="201">Return created post</response>
+        /// <response code="400">requisition error</response>
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(PostModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
@@ -120,7 +120,7 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Atualizar Post
+        /// Update post
         /// </summary>
         /// <param name="upPost">AtualizarPostagemDTO</param>
         /// <returns>ActionResult</returns>
@@ -130,15 +130,15 @@ namespace BlogPessoal.src.controllers
         ///     PUT /api/Posts
         ///     {
         ///        "id": 1,   
-        ///        "titulo": "Já vendi o Fiat Uno", 
-        ///        "descricao": "Mas ainda tenho outras coisas pra vender, quem quiser DM",
-        ///        "foto": "URLDAIMAGEMDASCOISAS",
-        ///        "descricaoTema": "ELETRONICOS"
+        ///        "title": "Já vendi o Fiat Uno", 
+        ///        "description": "Mas ainda tenho outras coisas pra vender, quem quiser DM",
+        ///        "photo": "URLDAIMAGEMDASCOISAS",
+        ///        "descriptionTheme": "ELETRONICOS"
         ///     }
         ///
         /// </remarks>
-        /// <response code="200">Retorna postagem atualizada</response>
-        /// <response code="400">Erro na requisição</response>
+        /// <response code="200">Return deleted post</response>
+        /// <response code="400">requisition error</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
@@ -152,11 +152,11 @@ namespace BlogPessoal.src.controllers
         }
 
         /// <summary>
-        /// Deletar postagem pelo Id
+        /// Delete post by Id
         /// </summary>
         /// <param name="idPost">int</param>
         /// <returns>ActionResult</returns>
-        /// <response code="204">Postagem deletada</response>
+        /// <response code="204">Deleted Post</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpDelete("delete/{idPost}")]
         [Authorize]

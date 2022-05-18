@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace BlogPessoal.src.dtos
 {
     /// <summary>
-    /// <para>Resumo: Classe espelho para criar um novo usuario</para>
-    /// <para>Criado por: Lucas Reluz</para>
-    /// <para>Versão: 1.0</para>
+    /// <para>Abstract: Mirror class to create a new user</para>
+    /// <para>Created by: Lucas Reluz</para>
+    /// <para>Version: 1.0</para>
     /// <para>Data: 29/04/2022 / Horario 10:47</para>
     /// </summary>
     public class NewUserDTO
@@ -34,11 +34,11 @@ namespace BlogPessoal.src.dtos
             Photo = photo;
         }
     }
-    
+
     /// <summary>
-    /// <para>Resumo: Classe espelho para atualizar um novo usuario</para>
-    /// <para>Criado por: Lucas Reluz</para>
-    /// <para>Versão: 1.0</para>
+    /// <para>Abstract: Mirror class to update a user</para>
+    /// <para>Created by: Lucas Reluz</para>
+    /// <para>Version: 1.0</para>
     /// <para>Data: 29/04/2022 / Horario 10:47</para>
     /// </summary>
     public class UpdateUserDTO

@@ -27,12 +27,12 @@ namespace BlogPessoal.src.controllers
         #region Métodos
 
         /// <summary>
-        /// Responsável por pegar a autorização
+        /// Responsible for getting the authorization
         /// </summary>
-        /// <param name="authentication">AutenticarDTO</param>
+        /// <param name="authentication">AuthenticateDTO</param>
         /// <returns>ActionResult</returns>
         /// <remarks>
-        /// Exemplo de requisição:
+        /// Requisition example:
         ///
         ///     POST /api/Authentication
         ///     {
@@ -41,9 +41,9 @@ namespace BlogPessoal.src.controllers
         ///     }
         ///
         /// </remarks>
-        /// <response code="201">Retorna usuario criado</response>
-        /// <response code="400">Erro na requisição</response>
-        /// <response code="401">E-mail ou senha invalido</response>
+        /// <response code="201">Return Created User</response>
+        /// <response code="400">Requisition Error</response>
+        /// <response code="401">E-mail or password invalid</response>
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AuthorizationDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

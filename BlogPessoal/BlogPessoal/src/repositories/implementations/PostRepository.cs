@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace BlogPessoal.src.repositories.implementations
 {
     /// <summary>
-    /// <para>Resumo: Classe responsavel por implementar IPost</para>
-    /// <para>Criado por: Lucas Reluz</para>
-    /// <para>Versão: 1.0</para>
+    /// <para>Abstract: Class responsible for implementing IPost</para>
+    /// <para>Created by: Lucas Reluz</para>
+    /// <para>Version: 1.0</para>
     /// <para>Data: 12/05/2022 | 12:17</para>
     /// </summary>
     public class PostRepository : IPost
@@ -31,9 +31,9 @@ namespace BlogPessoal.src.repositories.implementations
 
         #region Metodos
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por deletar uma Postagem</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo: Asynchronous method responsible for delete post</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <param name="id">Id Postagem</param>
         /// <para>Data: 12/05/2022 | 12:20</para>
         /// </summary>
@@ -43,9 +43,9 @@ namespace BlogPessoal.src.repositories.implementations
             await _context.SaveChangesAsync();
         }
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por pegar todas as postagens</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo:Asynchronous method responsible for getting all posts</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <para>Data: 12/05/2022 | 12:21</para>
         /// </summary>
         public async Task<List<PostModel>> GetAllPostsAsync()
@@ -53,9 +53,9 @@ namespace BlogPessoal.src.repositories.implementations
             return await _context.Posts.ToListAsync();
         }
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por pegar uma postagem pelo Id</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo: Asynchronous method responsible for getting post by Id</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <param name="id">Id Postagem</param>
         /// <para>Data: 12/05/2022 | 12:21</para>
         /// </summary>
@@ -64,9 +64,9 @@ namespace BlogPessoal.src.repositories.implementations
             return await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
         }
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por deletar uma Postagem</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo: Asynchronous method responsible for getting post by search</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <param name="title">Titulo</param>
         /// <param name="descriptionTheme">Descricao Tema</param>
         /// <param name="creatorName">Nome do Criador</param>
@@ -140,9 +140,9 @@ namespace BlogPessoal.src.repositories.implementations
             }
         }
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por criar nova postagem</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo: Asynchronous method responsible for updated post</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <param name="post">NewPostDTO</param>
         /// <para>Data: 12/05/2022 | 12:24</para>
         /// </summary>
@@ -160,9 +160,9 @@ namespace BlogPessoal.src.repositories.implementations
 
         }
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por atualizar uma postagem</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo: Asynchronous method responsible for updated post</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <param name="post">UpdatePostDTO</param>
         /// <para>Data: 12/05/2022 | 12:24</para>
         /// </summary>

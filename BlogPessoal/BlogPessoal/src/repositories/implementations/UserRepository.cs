@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace BlogPessoal.src.repositories.implementations
 {
     /// <summary>
-    /// <para>Resumo: Classe responsavel por implementar IUser</para>
-    /// <para>Criado por: Lucas Reluz</para>
-    /// <para>Versão: 1.0</para>
+    /// <para>Abstract: Class responsible for implementing IUser</para>
+    /// <para>Created by: Lucas Reluz</para>
+    /// <para>Version: 1.0</para>
     /// <para>Data: 12/05/2022 | 12:02</para>
     /// </summary>
     public class UserRepository : IUser
@@ -33,9 +33,9 @@ namespace BlogPessoal.src.repositories.implementations
 
         #region Metodos
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por deletar o Usuario</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo: Asynchronous method responsible for deleting the User</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <param name="id">Id Usuario</param>
         /// <para>Data: 12/05/2022 | 12:05</para>
         /// </summary>
@@ -46,9 +46,9 @@ namespace BlogPessoal.src.repositories.implementations
             
         }
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por pegar usuario pelo email</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo: Asynchronous method responsible for getting user by email</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <param name="email">Email Usuario</param>
         /// <para>Data: 12/05/2022 | 12:06</para>
         /// </summary>
@@ -57,9 +57,9 @@ namespace BlogPessoal.src.repositories.implementations
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por pegar usuario pelo Id</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo: Asynchronous method responsible for getting user by Id</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <param name="id">Id Usuario</param>
         /// <para>Data: 12/05/2022 | 12:07</para>
         /// </summary>
@@ -68,9 +68,9 @@ namespace BlogPessoal.src.repositories.implementations
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por pegar usuario pelo nome</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo: Asynchronous method responsible for getting user by name</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <param name="name">Nome do Usuario</param>
         /// <para>Data: 12/05/2022 | 12:07</para>
         /// </summary>
@@ -79,9 +79,9 @@ namespace BlogPessoal.src.repositories.implementations
             return await _context.Users.Where(u => u.Name.Contains(name)).ToListAsync();
         }
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por criar um novo usuario</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo: Asynchronous method responsible for creating a new user</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <param name="user">NewUserDTO</param>
         /// <para>Data: 12/05/2022 | 12:09</para>
         /// </summary>
@@ -98,9 +98,9 @@ namespace BlogPessoal.src.repositories.implementations
             await _context.SaveChangesAsync();
         }
         /// <summary>
-        /// <para>Resumo: Metodo assincrono responsavel por atualizar um usuario</para>
-        /// <para>Criado por: Lucas Reluz</para>
-        /// <para>Versão: 1.0</para>
+        /// <para>Resumo: Asynchronous method responsible for updated a user</para>
+        /// <para>Created by: Lucas Reluz</para>
+        /// <para>Version: 1.0</para>
         /// <param name="user">UpdateUserDTO</param>
         /// <para>Data: 12/05/2022 | 12:09</para>
         /// </summary>
