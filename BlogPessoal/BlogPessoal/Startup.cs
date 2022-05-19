@@ -37,23 +37,6 @@ namespace BlogPessoal
         public void ConfigureServices(IServiceCollection services)
         {
             #region Configuração DB
-            services.AddDbContext<BlogPessoalContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            #endregion
-
-            //Configuração Controlador
-            services.AddControllers();
-            services.AddCors();
-
-
-            // Contexto
-            IConfigurationRoot config = new ConfigurationBuilder()
-            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.json")
-            .Build();
-            services.AddDbContext<BlogPessoalContext>(
-            opt => opt.
-            UseSqlServer(config.GetConnectionString("DefaultConnection")));
-
             // Configuraçãp Banco de Dados
             if (Configuration["Enviroment:Start"] == "PROD")
             {
@@ -67,7 +50,21 @@ namespace BlogPessoal
                 services.AddDbContext<BlogPessoalContext>(
                 opt =>
                 opt.UseSqlServer(Configuration["ConnectionStringsDev:DefaultConnection"]));
+                #endregion
             }
+                //Configuração Controlador
+                services.AddControllers();
+                services.AddCors();
+
+
+                // Contexto
+                IConfigurationRoot config = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+                services.AddDbContext<BlogPessoalContext>(
+                opt => opt.
+                UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
             // Repositorios
             services.AddScoped<IUser, UserRepository>();
@@ -147,12 +144,12 @@ namespace BlogPessoal
                 });
             }
             #endregion
-            
-            
+
+
             context.Database.EnsureCreated();
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
-            app.UseSwaggerUI(c => 
+            app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1");
                 c.RoutePrefix = string.Empty;
@@ -160,19 +157,19 @@ namespace BlogPessoal
 
             app.UseRouting();
 
-                app.UseCors(c => c
-               .AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader());
+            app.UseCors(c => c
+           .AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader());
 
-                app.UseAuthentication();
-                app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
 
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
-            }
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
+}
